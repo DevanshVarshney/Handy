@@ -8,7 +8,7 @@
         <mesh filename="package://arm_description/meshes/basecone.STL" scale = "0.001 0.001 0.001"/>
       </geometry>
        <material name="blue">
-      <color rgba="0.0 0.0 1.0 1.0"/>
+      <color rgba="0.0 0.0 1.0 0.50"/>
     </material>
     </visual>
     <collision>
@@ -62,4 +62,139 @@
     <child link = "shoulder_shell_link"/>
     <origin xyz = "0.0 0.0 0.0" rpy = "0.0 0.0 0.0"/>
   </joint>
+
+  <link name = "arm_base_link">
+    <visual>
+      <origin xyz="0.1382 0.0 0.15293" rpy = "3.1416 0.0 -1.5707"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/UpperArm.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.1382 0.0 0.15293" rpy = "3.1416 0.0 -1.5707"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/UpperArm.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "arm_shoulder_joint" type = "revolute">
+    <parent link = "shoulder_shell_link"/>
+    <child link = "arm_base_link"/>
+    <origin xyz = "0.0 0.0 0.5" rpy = "0.0 0.0 0.0"/>
+    <axis xyz = "1 0 0"/>
+    <limit lower="-3.14" upper="3.14" effort="20" velocity="1.0"/>
+  </joint> 
+
+  <link name = "elbow_base_link">
+    <visual>
+      <origin xyz="-0.04048 0.0 0.26078" rpy = "3.1416 -1.5707 0.0"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/elbowshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.04048 0.0 0.26078" rpy = "3.1416 -1.5707 0.0"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/elbowshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "elbow_shoulder_joint" type = "fixed">
+    <parent link = "arm_base_link"/>
+    <child link = "elbow_base_link"/>
+    <origin xyz = "0.0 0.0 0.5" rpy = "0.0 0.0 0.0"/>
+  </joint> 
+
+  <link name = "forearm_base_link">
+    <visual>
+      <origin xyz="-0.06367 0.0 0.41191" rpy = "3.1416 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/Forearm.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.06367 0.0 0.41191" rpy = "3.1416 0.0 0.0"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/Forearm.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "forearm_elbow_joint" type = "revolute">
+    <parent link = "elbow_base_link"/>
+    <child link = "forearm_base_link"/>
+    <origin xyz = "0.0 0.0 0.5" rpy = "0.0 0.0 0.0"/>
+    <axis xyz = "1 0 0"/>
+    <limit lower="-3.14" upper="3.14" effort="20" velocity="1.0"/>
+  </joint> 
+
+  <link name = "wrist_base_link">
+    <visual>
+      <origin xyz="-0.051881 0.0 0.43873" rpy = "1.5707 3.1416 -1.5707"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/wristshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.051881 0.0 0.43873" rpy = "1.5707 3.1416 -1.5707"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/wristshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "wrist_forearm_joint" type = "fixed">
+    <parent link = "forearm_base_link"/>
+    <child link = "wrist_base_link"/>
+    <origin xyz = "0.0 0.0 0.5" rpy = "0.0 0.0 0.0"/>
+  </joint>
+
+  <link name = "wrist_middle_link">
+    <visual>
+      <origin xyz="-0.023202 0.0 0.46341" rpy = "-3.1416 0.0 1.5707"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/wristshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.023202 0.0 0.46341" rpy = "-3.1416 0.0 1.5707"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/wristshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "wrist_middle_wrist_base_joint" type = "revolute">
+    <parent link = "wrist_base_link"/>
+    <child link = "wrist_middle_link"/>
+    <origin xyz = "0.0 0.0 0.5" rpy = "0.0 0.0 0.0"/>
+    <axis xyz = "1 0 0"/>
+    <limit lower="-3.14" upper="3.14" effort="20" velocity="1.0"/>
+  </joint> 
+
+  <link name = "gripper_base_link">
+    <visual>
+      <origin xyz="-0.022632 -0.017564 0.49261" rpy = "-1.5707 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/wristshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.022632 -0.017564 0.49261" rpy = "-1.5707 0.0 0.0"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/wristshell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "gripper_wrist_middle_joint" type = "revolute">
+    <parent link = "wrist_middle_link"/>
+    <child link = "gripper_base_link"/>
+    <origin xyz = "0.0 0.0 0.5" rpy = "0.0 0.0 0.0"/>
+    <axis xyz = "0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="20" velocity="1.0"/>
+  </joint>
+
 </robot>
