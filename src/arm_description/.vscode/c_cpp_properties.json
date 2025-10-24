@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ros/ros2_ws/install/my_robot_interfaces/include/**",
+        "/home/ros/turtlebot3_ws/install/turtlebot3_gazebo/include/**",
+        "/home/ros/turtlebot3_ws/install/turtlebot3_fake_node/include/**",
+        "/home/ros/challenges/install/challenge_actions_1/include/**",
+        "/home/ros/challenges/install/action_final_project_level3/include/**",
+        "/home/ros/install/my_robot_interfaces/include/**",
+        "/home/ros/install/action_final_project_level3/include/**",
+        "/opt/ros/humble/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

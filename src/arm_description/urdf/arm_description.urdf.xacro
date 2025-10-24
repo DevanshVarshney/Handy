@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot name = "robotic_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="3.1416 0 0"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/basecone.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+       <material name="blue">
+      <color rgba="0.0 0.0 1.0 1.0"/>
+    </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/basecone.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name = "shoulder_base_link">
+    <visual>
+      <origin xyz="-0.0556 -0.0254 0.0" rpy = "0 0 0"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/shoulderplate.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0556 -0.0254 0.0" rpy = "0 0 0"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/shoulderplate.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "base_to_shoulder" type="revolute">
+    <parent link = "base_link"/>
+    <child link = "shoulder_base_link"/>
+    <origin xyz = "01.0 01.0 1.05" rpy = "1.0 0 0"/>
+    <axis xyz = "0 0 1"/>
+    <!-- <limit lower="-3.14" upper="3.14" effort="20" velocity="1.0"/> -->
+  </joint>
+
+  <link name = "shoulder_shell_link">
+    <visual>
+      <origin xyz = "-0.017496 0.0 0.05735" rpy = "-1.5707 0.0 1.5707"/>
+      <geometry>
+        <mesh filename="package://arm_description/meshes/shouldershell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.017496 0.0 0.05735" rpy = "-1.5707 0.0 1.5707"/>
+      <geometry>
+        <mesh filename ="package://arm_description/meshes/shouldershell.STL" scale = "0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name = "shoulder_shell_base_joint" type = "fixed">
+    <parent link = "shoulder_base_link"/>
+    <child link = "shoulder_shell_link"/>
+    <origin xyz = "0.0 0.0 0.0" rpy = "0.0 0.0 0.0"/>
+  </joint>
+</robot>
